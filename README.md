@@ -25,3 +25,4 @@ Simply open `index.html` in your web browser.
 Make your changes, run `make`, and open the new `index.html`.
 
 Look at `design/` for how the application was designed.
+
