@@ -23,5 +23,70 @@
     <script src="./script.js" defer></script>
     <title>Home</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <textarea id="question" class="card-text hidden" placeholder="Question?"></textarea>
+        </div>
+        <div class="fact_and_rule_container">
+          <div class="fact_container draggable-container">
+            <input
+              type="text"
+              id="fact"
+              class="list-group-item draggable"
+              placeholder="fact1"
+              draggable="true"
+              touch="true"
+            />
+            <input
+              type="text"
+              id="fact"
+              class="list-group-item draggable"
+              placeholder="fact2"
+              draggable="true"
+              touch="true"
+            />
+          </div>
+          <div class="rule_container draggable-container">
+            <input
+              type="text"
+              id="rule"
+              class="list-group-item draggable"
+              placeholder="rule1"
+              draggable="true"
+              touch="true"
+            />
+            <input
+              type="text"
+              id="rule"
+              class="list-group-item draggable"
+              placeholder="rule2"
+              draggable="true"
+              touch="true"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav nav-tabs justify-content-center navbar-light bg-light">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle btn btn-outline-primary"
+            href="#"
+            id="navbarDropdown btn_add"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ></a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a id="btn_add_question" class="dropdown-item" href="#">Add Question</a></li>
+            <li><a id="btn_add_fact" class="dropdown-item" href="#">Add Fact</a></li>
+            <li><a id="btn_add_rule" class="dropdown-item" href="#">Add Rule</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </body>
 </html>
