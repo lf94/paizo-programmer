@@ -34,7 +34,6 @@ draggableContainer.forEach((container) => {
   container.addEventListener("dragover", (e) => {
     e.preventDefault();
     const afterElement = getDragAfterElement(container, e.clientY);
-    console.log(e.clientY);
     const draggable = document.querySelector(".dragging");
     if (afterElement == null) {
       container.appendChild(draggable);
@@ -47,7 +46,6 @@ draggableContainer.forEach((container) => {
   container.addEventListener("touchmove", (e) => {
     e.preventDefault();
     const afterElement = getDragAfterElementMobile(container, e.changedTouches[0].screenY);
-    console.log(e.changedTouches[0].screenY);
     const draggable = document.querySelector(".dragging");
     if (afterElement == null) {
       container.appendChild(draggable);
