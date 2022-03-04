@@ -15,6 +15,7 @@ you would do much better with a programmatic reasoner in your pocket.
 * Designed to balance between context and focus
 * Day/Night mode
 * Use of swiping for ergonomics
+* All code inlined for easy web application saving
 
 ### Running your own instance
 
