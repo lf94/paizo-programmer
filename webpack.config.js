@@ -8,6 +8,7 @@ const filename = 'paizo-prolog.js';
 module.exports = {
   entry: './src/index.tsx',
   mode: 'development',
+  target: 'web',
   devtool: false,
   module: {
     rules: [
@@ -24,6 +25,13 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      fs: false,
+      path: false,
+      os: false,
+      crypto: false,
+      child_process: false,
+    },
   },
   output: {
     filename,

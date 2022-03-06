@@ -4,7 +4,6 @@ An explanation of what and how our dependencies are used.
 
 These are the technologies that Paizo Prolog must be restricted to:
 
-* [React Swipeable Views](https://react-swipeable-views.com/)
 * [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 * [Bootstrap](https://github.com/twbs/bootstrap)
 * [React](https://github.com/facebook/react)
@@ -21,5 +20,5 @@ React for the UI. Leverages the current existing React components.
 
 TypeScript to make changes with confidence.
 
-React swipable views and beautiful drag-and-drop are required for handling
-the complex world of touch interfaces.
+React beautiful drag-and-drop is required for handling the complex world of
+touch interfaces.
