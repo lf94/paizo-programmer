@@ -176,6 +176,7 @@ const PaizoProlog = () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.onchange = (e) => {
+      // @ts-ignore
       var file = e.target.files[0];
       if (!file) { return; }
       var reader = new FileReader();
