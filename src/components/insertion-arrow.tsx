@@ -27,7 +27,7 @@ const insertionArrowStylePlus: CSSProperties = {
 };
 
 export const InsertionArrow: FC<Props> = ({ onClick }) =>
-  <div onClick={onClick} style={insertionArrowStyleOuter}>
+  <div onClick={(e) => { e.stopPropagation(); onClick(); }} style={insertionArrowStyleOuter}>
     <div className='border bg-white' style={insertionArrowStyleInner}>
          <span style={insertionArrowStylePlus}>
            +
