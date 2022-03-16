@@ -25,6 +25,8 @@ you would do much better with a programmatic reasoner in your pocket.
 ## Possible improvements
 
 * Animations
+* Toggle dark/light mode
+* Auto-detect environment to load proper Bootstrap UI theme
 * Support more languages
   * Change the name to "Paizo Programmer"
 
