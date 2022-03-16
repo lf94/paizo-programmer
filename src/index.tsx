@@ -1,3 +1,12 @@
+// Bootstrap 4 default styling
+// import 'bootstrap/dist/css/bootstrap.css';
+
+// Windows styling
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'winstrap/dist/css/winstrap.css';
+// import 'winstrap/dist/css/winstrap-optional.css';
+
+// Android styling
 import '../node_modules/mdbootstrap/css/bootstrap.css';
 import '../node_modules/mdbootstrap/css/mdb.lite.min.css';
 import '../node_modules/mdbootstrap/css/style.css';
