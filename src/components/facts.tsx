@@ -41,15 +41,22 @@ export const FactItem: FC<FactProps> = ({ onChange, onInsert, fact }) => {
   let showPre = isHidden ? '' : 'd-none';
   let showTA = isHidden ? 'd-none' : '';
   const textArea = useRef(null);
-  const toggleModify = useCallback(() => { setHidden(!isHidden); }, []);
+  const pre = useRef(null);
 
-  // @ts-ignore
-  useEffect(() => { textArea.current.focus(); });
+  useEffect(() => {
+    if (isHidden) {
+      // @ts-ignore
+      textArea.current.style.height = pre.current.scrollHeight + 'px';
+    } else {
+      // @ts-ignore
+      textArea.current.focus();
+    }
+  });
 
-  return <div className="fact-item" onClick={toggleModify}>
+  return <div className="fact-item">
     <div className='card'>
-      <div className='card-body'>
-        <pre style={factItemFontStyle} className={showPre}>
+      <div className='card-body' onClick={() => setHidden(false)}>
+        <pre style={factItemFontStyle} className={showPre} ref={pre}>
           { fact }
         </pre>
         <div className={showTA + ' mb-4'}>
