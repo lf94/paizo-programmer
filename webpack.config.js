@@ -36,6 +36,7 @@ module.exports = {
   output: {
     filename,
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin(),

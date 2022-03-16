@@ -8,11 +8,15 @@ import {
 
 import { InsertionArrow } from './insertion-arrow';
 
-export type Fact = string;
+export interface Fact {
+  id: string;
+  text: string;
+}
+
 export type Facts = Fact[];
 
 interface FactProps {
-  onChange: (fact: Fact) => void;
+  onChange: (text: string) => void;
   onInsert: () => void;
   fact: Fact;
 }
@@ -53,18 +57,18 @@ export const FactItem: FC<FactProps> = ({ onChange, onInsert, fact }) => {
     }
   });
 
-  return <div className="fact-item">
+  return <div className='fact-item'>
     <div className='card'>
       <div className='card-body' onClick={() => setHidden(false)}>
         <pre style={factItemFontStyle} className={showPre} ref={pre}>
-          { fact }
+          { fact.text }
         </pre>
         <div className={showTA + ' mb-4'}>
           <textarea style={factItemFontStyle} className="form-control"
                     onChange={({ target: { value }}) => onChange(value)}
                     ref={textArea}
                     onBlur={() => setHidden(true)}
-                    value={ fact }></textarea>
+                    value={ fact.text }></textarea>
         </div>
       </div>
     </div>
@@ -85,7 +89,7 @@ export const FactList: FC<FactsProps> = ({ onMove, onChange, onInsert, facts }) 
           ref={provided.innerRef}
           {...provided.droppableProps}>
           { facts.map((f: Fact, index: number) =>
-            <Draggable key={index} draggableId={'fact'+index} index={index}>
+            <Draggable key={f.id} draggableId={f.id} index={index}>
               {(provided, snapshot) => (
                 <div className='mt-2'
                   ref={provided.innerRef}

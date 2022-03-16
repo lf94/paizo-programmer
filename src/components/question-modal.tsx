@@ -30,7 +30,7 @@ export const QuestionModal: FC<Props> = ({
 }) => {
   return <div className="question-modal">
     <div className='border'>
-      <div className='overflow-scroll mt-3 mb-3 pb-4' style={ { whiteSpace: 'nowrap' } }>
+      <div className='overflow-scroll mt-3 mb-3 pb-4' style={ { whiteSpace: 'nowrap', overflowX: 'scroll' } }>
         <button style={ {...buttonStyles, marginLeft: '1em' } }
                 className={ buttonClasses + ' btn-primary' }
                 onClick={onExecute}>

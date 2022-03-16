@@ -1,10 +1,13 @@
-// @ts-ignore
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/mdbootstrap/css/bootstrap.css';
+import '../node_modules/mdbootstrap/css/mdb.lite.min.css';
+import '../node_modules/mdbootstrap/css/style.css';
 
 import { default as React, FC, useCallback, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { DraggableLocation } from 'react-beautiful-dnd';
 import { create as createTauSession } from 'tau-prolog';
+
+import './style.css';
 
 import { factsAsText, factsAsBlocks } from './test-data';
 import { FactItem, FactList, Facts } from './components/facts';
@@ -87,16 +90,16 @@ function reducer(state: State, action: ActionData): State {
     }
     case Action.FactInsert: {
       const facts = [...state.facts];
-      facts.splice(action.index! + 1, 0, '');
+      facts.splice(action.index! + 1, 0, { id: Math.random().toString(), text: '' });
       return { ...state, facts };
     }
     case Action.FactChange: {
       const facts = [...state.facts];
-      facts[action.index!] = action.text!;
+      facts[action.index!].text = action.text!;
       return { ...state, facts };
     }
     case Action.FactClear: {
-      const facts = [''];
+      const facts = [{ id: Math.random().toString(), text: '' }];
       return { ...state, facts };
     }
     case Action.FactsLoad: {
@@ -130,7 +133,7 @@ function reducer(state: State, action: ActionData): State {
 const StickyBottom: FC<{}> = (props) =>
   <div className='bg-white'
        style={{
-         position: 'fixed',
+         position: 'sticky',
          left: 0,
          bottom: 0,
          width: '100%',
@@ -157,7 +160,7 @@ const PaizoProlog = () => {
 
   const saveFile = useCallback(async () => {
     const anchor = document.createElement('a');
-    const message = facts.join('\n');
+    const message = facts.map(s => s.text).join('\n');
     
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
@@ -193,7 +196,7 @@ const PaizoProlog = () => {
   useEffect(() => {
     if (display == Display.AnswersModal) {
       const tau = createTauSession();
-      tau.consult(facts.join('\n'), {
+      tau.consult(facts.map(s => s.text).join('\n'), {
         success() {
           tau.query(question, {
             success() {
@@ -211,12 +214,14 @@ const PaizoProlog = () => {
   }, [display]);
 
   return <div className='paizo-prolog'>
-    <FactList
-      facts={facts}
-      onMove={(facts, source, destination) => dispatch({ type: Action.FactMove, facts, source, destination })}
-      onInsert={(index) => dispatch({ type: Action.FactInsert, index })}
-      onChange={(index, text) => dispatch({ type: Action.FactChange, index, text })}
-    />
+    <div className='container'>
+      <FactList
+        facts={facts}
+        onMove={(facts, source, destination) => dispatch({ type: Action.FactMove, facts, source, destination })}
+        onInsert={(index) => dispatch({ type: Action.FactInsert, index })}
+        onChange={(index, text) => dispatch({ type: Action.FactChange, index, text })}
+      />
+    </div>
     <StickyBottom>
       { display == Display.QuestionModal && <QuestionModal
         text={question}

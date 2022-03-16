@@ -16,19 +16,19 @@ const insertionArrowStyleInner: CSSProperties = {
   width: '17mm',
   height: '13mm',
   position: 'absolute',
-  right: '2mm',
+  right: '0',
   zIndex: 1,
 };
 const insertionArrowStylePlus: CSSProperties = {
-  left: '7mm',
-  bottom: '1.5mm',
+  left: '-1mm',
+  bottom: '4.5mm',
   fontSize: '10mm',
   position: 'relative',
 };
 
 export const InsertionArrow: FC<Props> = ({ onClick }) =>
   <div onClick={(e) => { e.stopPropagation(); onClick(); }} style={insertionArrowStyleOuter}>
-    <div className='border bg-white' style={insertionArrowStyleInner}>
+    <div className='btn btn-default' style={insertionArrowStyleInner}>
          <span style={insertionArrowStylePlus}>
            +
          </span>

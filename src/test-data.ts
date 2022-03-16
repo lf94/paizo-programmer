@@ -17,4 +17,7 @@ witness(Witness) :-
 
 const notEmpty = (s: string) => s !== '' && s !== '\n';
 
-export const factsAsBlocks = (text) => text.split('\n\n').filter(notEmpty);
+export const factsAsBlocks = (text) => text
+  .split('\n\n')
+  .filter(notEmpty)
+  .map((text: string, index: number) => ({ id: text + index, text }));
