@@ -8,8 +8,9 @@ Paizo is a playground for Prolog users. It's intended to be used for those
 quite moments in life where you have a few minutes, or when in a heated debate
 you would do much better with a programmatic reasoner in your pocket.
 
-![Facts view](./design/facts.png)
-![Answers view](./design/answers.png)
+![Bootstrap theme](./design/1.png)
+![Android theme](./design/2.png)
+![Windows theme](./design/3.png)
 
 ## Features
 
