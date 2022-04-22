@@ -1,6 +1,6 @@
 {
-  "name": "paizo-prolog",
-  "version": "1.0.0",
+  "name": "paizo-programmer",
+  "version": "2.0.0",
   "description": "A mobile-first prolog programming environment",
   "main": "index.js",
   "scripts": {
@@ -35,5 +35,8 @@
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
     "winstrap": "github:winjs/winstrap"
+  },
+  "dependencies": {
+    "@sosml/interpreter": "^1.6.10"
   }
 }

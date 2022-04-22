@@ -6,6 +6,8 @@ interface Props {
   onSave: () => void;
   onLoad: () => void;
   onClear: () => void;
+  onSwitchLanguage: () => void;
+  currentLanguage: string;
   text: string;
 }
 
@@ -26,6 +28,8 @@ export const QuestionModal: FC<Props> = ({
   onSave,
   onLoad,
   onClear,
+  onSwitchLanguage,
+  currentLanguage,
   text
 }) => {
   return <div className="question-modal">
@@ -50,6 +54,11 @@ export const QuestionModal: FC<Props> = ({
                 className={ buttonClasses + ' btn-warning' }
                 onClick={onClear}>
           Clear
+        </button>
+        <button style={ buttonStyles }
+                className={ buttonClasses }
+                onClick={onSwitchLanguage}>
+          { currentLanguage }
         </button>
       </div>
       <div className='m-3'>

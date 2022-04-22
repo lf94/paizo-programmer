@@ -15,13 +15,12 @@ const answersModalFontStyle: CSSProperties = {
 
 // Show one answer at a time
 export const AnswersModal: FC<Props> = ({ onMore, onStop, answers }) => {
-  console.log(answers);
   const latestAnswer = answers[answers.length - 1];
   return <div className="answers-modal">
     <div className='card'>
       <div className='card-body'>
         <pre style={answersModalFontStyle} className="border-bottom pb-4">
-          { latestAnswer }
+          { latestAnswer || 'Waiting for answer...' }
         </pre>
         <div className='row m-2'>
           <div className='col text-center'>
