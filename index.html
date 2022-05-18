@@ -344,7 +344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html, body, .paizo, .paizo > .container { height: 100% }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".paizo {\n  display: flex;\n  flex-direction: column;\n}\nhtml, body, .paizo, .paizo > .container { height: 100% }\n.container { overflow: scroll; }\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -54007,6 +54007,53 @@ exports.AnswersModal = AnswersModal;
 
 /***/ }),
 
+/***/ "./src/components/arrow.tsx":
+/*!**********************************!*\
+  !*** ./src/components/arrow.tsx ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Arrow = void 0;
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const arrowStyleOuter = {
+    position: 'relative',
+    bottom: 'calc(13mm / 2)',
+};
+const arrowStyleInner = {
+    borderBottomLeftRadius: '100%',
+    borderTopLeftRadius: '100%',
+    borderBottomRightRadius: '25%',
+    borderTopRightRadius: '25%',
+    width: '17mm',
+    height: '13mm',
+    position: 'absolute',
+    right: '2mm',
+    zIndex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 0,
+    minWidth: '17mm',
+};
+const arrowStyleContent = {
+    fontSize: '10mm',
+    lineHeight: '10mm',
+    paddingLeft: '0.2em',
+};
+const Arrow = ({ onClick, content, className }) => react_1.default.createElement("div", { onClick: (e) => { e.stopPropagation(); onClick(); }, style: arrowStyleOuter },
+    react_1.default.createElement("div", { className: className, style: arrowStyleInner },
+        react_1.default.createElement("span", { style: arrowStyleContent }, content)));
+exports.Arrow = Arrow;
+
+
+/***/ }),
+
 /***/ "./src/components/facts.tsx":
 /*!**********************************!*\
   !*** ./src/components/facts.tsx ***!
@@ -54042,7 +54089,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FactList = exports.FactItem = void 0;
 const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const react_beautiful_dnd_1 = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-const insertion_arrow_1 = __webpack_require__(/*! ./insertion-arrow */ "./src/components/insertion-arrow.tsx");
+const arrow_1 = __webpack_require__(/*! ./arrow */ "./src/components/arrow.tsx");
 const factItemFontStyle = {
     fontFamily: 'monospace',
     fontSize: '14px',
@@ -54055,23 +54102,25 @@ const FactItem = ({ onChange, onInsert, fact }) => {
     let showTA = isHidden ? 'd-none' : '';
     const textArea = (0, react_1.useRef)(null);
     const pre = (0, react_1.useRef)(null);
+    const onConfirmChange = (0, react_1.useCallback)(() => {
+        if (textArea === null) {
+            return;
+        }
+        // @ts-ignore
+        textArea.current.blur();
+    }, [textArea]);
     (0, react_1.useEffect)(() => {
-        if (isHidden) {
-            // @ts-ignore
-            textArea.current.style.height = pre.current.scrollHeight + 'px';
-        }
-        else {
-            // @ts-ignore
-            textArea.current.focus();
-        }
+        // @ts-ignore
+        textArea.current.focus();
     });
+    const calculateHeight = (0, react_1.useCallback)(() => fact.text.split('\n').length, [fact]);
     return react_1.default.createElement("div", { className: 'fact-item' },
         react_1.default.createElement("div", { className: 'card' },
             react_1.default.createElement("div", { className: 'card-body', onClick: () => setHidden(false) },
                 react_1.default.createElement("pre", { style: factItemFontStyle, className: showPre, ref: pre }, fact.text),
                 react_1.default.createElement("div", { className: showTA + ' mb-4' },
-                    react_1.default.createElement("textarea", { style: factItemFontStyle, className: "form-control", onChange: ({ target: { value } }) => onChange(value), ref: textArea, onBlur: () => setHidden(true), value: fact.text })))),
-        react_1.default.createElement(insertion_arrow_1.InsertionArrow, { onClick: onInsert }));
+                    react_1.default.createElement("textarea", { style: factItemFontStyle, className: "form-control", onChange: ({ target: { value } }) => onChange(value), rows: calculateHeight(), ref: textArea, onBlur: () => setHidden(true), value: fact.text })))),
+        react_1.default.createElement(arrow_1.Arrow, { className: isHidden ? 'btn btn-secondary' : 'btn btn-primary', onClick: isHidden ? onInsert : onConfirmChange, content: isHidden ? '+' : '✓' }));
 };
 exports.FactItem = FactItem;
 const FactList = ({ onMove, onChange, onInsert, facts }) => {
@@ -54085,53 +54134,6 @@ const FactList = ({ onMove, onChange, onInsert, facts }) => {
             provided.placeholder))));
 };
 exports.FactList = FactList;
-
-
-/***/ }),
-
-/***/ "./src/components/insertion-arrow.tsx":
-/*!********************************************!*\
-  !*** ./src/components/insertion-arrow.tsx ***!
-  \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.InsertionArrow = void 0;
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const insertionArrowStyleOuter = {
-    position: 'relative',
-    bottom: 'calc(13mm / 2)',
-};
-const insertionArrowStyleInner = {
-    borderBottomLeftRadius: '100%',
-    borderTopLeftRadius: '100%',
-    borderBottomRightRadius: '25%',
-    borderTopRightRadius: '25%',
-    width: '17mm',
-    height: '13mm',
-    position: 'absolute',
-    right: '2mm',
-    zIndex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 0,
-    minWidth: '17mm',
-};
-const insertionArrowStylePlus = {
-    fontSize: '10mm',
-    lineHeight: '10mm',
-    paddingLeft: '0.2em',
-};
-const InsertionArrow = ({ onClick }) => react_1.default.createElement("div", { onClick: (e) => { e.stopPropagation(); onClick(); }, style: insertionArrowStyleOuter },
-    react_1.default.createElement("div", { className: 'btn btn-primary', style: insertionArrowStyleInner },
-        react_1.default.createElement("span", { style: insertionArrowStylePlus }, "+")));
-exports.InsertionArrow = InsertionArrow;
 
 
 /***/ }),
@@ -54356,9 +54358,6 @@ function reducer(state, action) {
     return initialState;
 }
 const StickyBottom = (props) => react_1.default.createElement("div", { className: 'bg-white', style: {
-        position: 'sticky',
-        left: 0,
-        bottom: 0,
         width: '100%',
         zIndex: 2
     } }, props.children);
