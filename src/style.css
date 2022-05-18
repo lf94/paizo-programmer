@@ -1,1 +1,6 @@
+.paizo {
+  display: flex;
+  flex-direction: column;
+}
 html, body, .paizo, .paizo > .container { height: 100% }
+.container { overflow: scroll; }

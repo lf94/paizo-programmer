@@ -6,7 +6,7 @@ import {
   DraggableLocation,
 } from 'react-beautiful-dnd';
 
-import { InsertionArrow } from './insertion-arrow';
+import { Arrow } from './arrow';
 
 export interface Fact {
   id: string;
@@ -47,15 +47,20 @@ export const FactItem: FC<FactProps> = ({ onChange, onInsert, fact }) => {
   const textArea = useRef(null);
   const pre = useRef(null);
 
+  const onConfirmChange = useCallback(() => {
+    if (textArea === null) { return; }
+    // @ts-ignore
+    textArea.current.blur();
+  }, [textArea])
+
   useEffect(() => {
-    if (isHidden) {
-      // @ts-ignore
-      textArea.current.style.height = pre.current.scrollHeight + 'px';
-    } else {
-      // @ts-ignore
-      textArea.current.focus();
-    }
+    // @ts-ignore
+    textArea.current.focus();
   });
+
+  const calculateHeight = useCallback(() =>
+    fact.text.split('\n').length
+  , [fact])
 
   return <div className='fact-item'>
     <div className='card'>
@@ -66,13 +71,18 @@ export const FactItem: FC<FactProps> = ({ onChange, onInsert, fact }) => {
         <div className={showTA + ' mb-4'}>
           <textarea style={factItemFontStyle} className="form-control"
                     onChange={({ target: { value }}) => onChange(value)}
+                    rows={calculateHeight()}
                     ref={textArea}
                     onBlur={() => setHidden(true)}
                     value={ fact.text }></textarea>
         </div>
       </div>
     </div>
-    <InsertionArrow onClick={onInsert}/>
+    <Arrow
+      className={isHidden ? 'btn btn-secondary' : 'btn btn-primary'}
+      onClick={isHidden ? onInsert : onConfirmChange}
+      content={isHidden ? '+' : '✓'}
+    />
   </div>;
 };
 

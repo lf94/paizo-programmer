@@ -2,13 +2,15 @@ import { default as React, CSSProperties, FC } from 'react';
 
 interface Props {
   onClick: () => void;
+  content: string;
+  className: string;
 }
 
-const insertionArrowStyleOuter: CSSProperties = {
+const arrowStyleOuter: CSSProperties = {
     position: 'relative',
     bottom: 'calc(13mm / 2)',
 };
-const insertionArrowStyleInner: CSSProperties = {
+const arrowStyleInner: CSSProperties = {
   borderBottomLeftRadius: '100%',
   borderTopLeftRadius: '100%',
   borderBottomRightRadius: '25%',
@@ -24,17 +26,17 @@ const insertionArrowStyleInner: CSSProperties = {
   margin: 0,
   minWidth: '17mm',
 };
-const insertionArrowStylePlus: CSSProperties = {
+const arrowStyleContent: CSSProperties = {
   fontSize: '10mm',
   lineHeight: '10mm',
   paddingLeft: '0.2em',
 };
 
-export const InsertionArrow: FC<Props> = ({ onClick }) =>
-  <div onClick={(e) => { e.stopPropagation(); onClick(); }} style={insertionArrowStyleOuter}>
-    <div className='btn btn-primary' style={insertionArrowStyleInner}>
-         <span style={insertionArrowStylePlus}>
-           +
+export const Arrow: FC<Props> = ({ onClick, content, className }) =>
+  <div onClick={(e) => { e.stopPropagation(); onClick(); }} style={arrowStyleOuter}>
+    <div className={className} style={arrowStyleInner}>
+         <span style={arrowStyleContent}>
+           {content}
          </span>
     </div>
   </div>;

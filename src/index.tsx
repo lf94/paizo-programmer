@@ -185,9 +185,6 @@ function reducer(state: State, action: ActionData): State {
 const StickyBottom: FC<{}> = (props) =>
   <div className='bg-white'
        style={{
-         position: 'sticky',
-         left: 0,
-         bottom: 0,
          width: '100%',
          zIndex: 2}}>
     { props.children }
